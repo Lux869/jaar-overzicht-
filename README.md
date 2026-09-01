@@ -1,6 +1,6 @@
 met simpele dark mode en light mode switch 
 
-<img width="1893" height="947" alt="Schermafbeelding 2026-09-01 104808" src="https://github.com/user-attachments/assets/6123f691-189b-4631-ae8c-c89274fdadc9" />
+<img width="500" height="250" alt="Schermafbeelding 2026-09-01 104808" src="https://github.com/user-attachments/assets/6123f691-189b-4631-ae8c-c89274fdadc9" />
 <img width="1894" height="948" alt="Schermafbeelding 2026-09-01 110046" src="https://github.com/user-attachments/assets/72431d0a-cffe-42d0-b1bd-2f444e4783b2" />
 <img width="1288" height="643" alt="Schermafbeelding 2026-09-01 105958" src="https://github.com/user-attachments/assets/5491d2ea-3b51-45b3-83a4-10e224f2e5d0" />
 <img width="1326" height="652" alt="Schermafbeelding 2026-09-01 110017" src="https://github.com/user-attachments/assets/f6db3619-6aa7-40d0-9c5c-7fa78922d224" />
