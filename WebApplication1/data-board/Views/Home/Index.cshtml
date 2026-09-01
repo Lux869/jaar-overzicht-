@@ -1,0 +1,428 @@
+﻿@model data_board.Models.ChartData
+
+@{
+ViewData["Title"] = "Omzet Dashboard";
+var culture = new System.Globalization.CultureInfo("nl-NL");
+}
+
+<div class="dashboard-shell">
+    <div class="dashboard-header">
+        <div>
+            <p class="eyebrow">Performance dashboard</p>
+            <h1>Omzet Dashboard</h1>
+        </div>
+        <span class="header-chip">Jaaroverzicht</span>
+    </div>
+
+    <div class="row g-4 metric-grid">
+        <div class="col-md-3 col-sm-6">
+            <div class="metric-card card">
+                <div class="card-body">
+                    <div class="metric-label">Totale omzet</div>
+                    <div class="metric-value success">@Model.TotalRevenue.ToString("C", culture)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="metric-card card">
+                <div class="card-body">
+                    <div class="metric-label">Inkoopkosten</div>
+                    <div class="metric-value danger">@Model.TotalPurchaseCosts.ToString("C", culture)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="metric-card card">
+                <div class="card-body">
+                    <div class="metric-label">Administratiekosten</div>
+                    <div class="metric-value warning">@Model.TotalAdministrationCosts.ToString("C", culture)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="metric-card card">
+                <div class="card-body">
+                    <div class="metric-label">Bezorgkosten</div>
+                    <div class="metric-value warning">@Model.TotalDeliveryCosts.ToString("C", culture)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="metric-card card">
+                <div class="card-body">
+                    <div class="metric-label">Werknemerskosten</div>
+                    <div class="metric-value danger">@Model.EmployeeCosts.ToString("C", culture)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="metric-card card">
+                <div class="card-body">
+                    <div class="metric-label">Totale kosten</div>
+                    <div class="metric-value neutral">@Model.TotalCosts.ToString("C", culture)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="metric-card card">
+                <div class="card-body">
+                    <div class="metric-label">Totale winst</div>
+                    <div class="metric-value primary">@Model.TotalProfit.ToString("C", culture)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="metric-card card">
+                <div class="card-body">
+                    <div class="metric-label">Items verkocht</div>
+                    <div class="metric-value neutral">@Model.TotalItems</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-panel card mt-5">
+        <div class="panel-header">
+            <div>
+                <p class="panel-kicker">Trend</p>
+                <h3>Groei van omzet</h3>
+            </div>
+            <div class="chart-toggle-group">
+                <button id="lineChartBtn" class="chart-toggle-btn active" type="button">Lijn Grafiek</button>
+                <button id="donutChartBtn" class="chart-toggle-btn" type="button">Donut Grafiek</button>
+            </div>
+        </div>
+
+        <div class="chart-layout">
+            <div class="chart-wrap">
+                <canvas id="financialChart"></canvas>
+            </div>
+
+            <div class="month-selector" aria-label="Maandoverzicht">
+                @for (var i = 0; i < Model.Labels.Length; i++)
+                {
+                    var month = Model.Labels[i];
+                    var earned = Model.ItemsSold[i] * Model.SalePrice;
+                    var spend = Model.ItemsSold[i] * (Model.PurchaseCostPerItem + Model.AdministrationCostPerItem + Model.DeliveryCostPerItem);
+
+                    <button type="button" class="month-button">
+                        <span class="month-name">@month</span>
+                        <span class="month-income">+ @earned.ToString("C", culture)</span>
+                        <span class="month-spend">- @spend.ToString("C", culture)</span>
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="recent-activity card mt-4">
+        <div class="recent-header">
+            <div>
+                <p class="panel-kicker">Recent activity</p>
+                <h3>Recente transacties</h3>
+            </div>
+            <span class="panel-badge success">+ 12.4%</span>
+        </div>
+
+        <div class="activity-list">
+            <div class="activity-item">
+                <div class="activity-badge success">A</div>
+                <div class="activity-text">
+                    <strong>Anna</strong>
+                    <span>Nieuwe bulkorder verwerkt voor SupplementsDirect</span>
+                </div>
+                <div class="activity-meta">
+                    <span class="activity-sign positive">+</span>
+                    <span class="activity-amount">€ 6.820,00</span>
+                </div>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-badge primary">M</div>
+                <div class="activity-text">
+                    <strong>Mark</strong>
+                    <span>Webshopverkoop afgerond voor GymFuel Pro</span>
+                </div>
+                <div class="activity-meta">
+                    <span class="activity-sign positive">+</span>
+                    <span class="activity-amount">€ 5.490,10</span>
+                </div>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-badge neutral">L</div>
+                <div class="activity-text">
+                    <strong>Lisa</strong>
+                    <span>Levering van PowerPeak goedgekeurd</span>
+                </div>
+                <div class="activity-meta">
+                    <span class="activity-sign negative">-</span>
+                    <span class="activity-amount">€ 1.800,00</span>
+                </div>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-badge accent">J</div>
+                <div class="activity-text">
+                    <strong>Jeroen</strong>
+                    <span>Vaste voorraadbestelling voor pre-workout</span>
+                </div>
+                <div class="activity-meta">
+                    <span class="activity-sign negative">-</span>
+                    <span class="activity-amount">€ 1.240,00</span>
+                </div>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-badge success">S</div>
+                <div class="activity-text">
+                    <strong>Sanne</strong>
+                    <span>Retourzending verwerkt uit de B2B-shop</span>
+                </div>
+                <div class="activity-meta">
+                    <span class="activity-sign negative">-</span>
+                    <span class="activity-amount">€ 460,00</span>
+                </div>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-badge primary">D</div>
+                <div class="activity-text">
+                    <strong>David</strong>
+                    <span>Nieuwe klantorder geplaatst voor post-workout</span>
+                </div>
+                <div class="activity-meta">
+                    <span class="activity-sign positive">+</span>
+                    <span class="activity-amount">€ 2.940,75</span>
+                </div>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-badge neutral">K</div>
+                <div class="activity-text">
+                    <strong>Karen</strong>
+                    <span>Verkoopcampagne afgerond met extra promo</span>
+                </div>
+                <div class="activity-meta">
+                    <span class="activity-sign positive">+</span>
+                    <span class="activity-amount">€ 3.185,40</span>
+                </div>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-badge accent">R</div>
+                <div class="activity-text">
+                    <strong>Ruben</strong>
+                    <span>Inkoopkosten voor proteinpallets</span>
+                </div>
+                <div class="activity-meta">
+                    <span class="activity-sign negative">-</span>
+                    <span class="activity-amount">€ 2.120,50</span>
+                </div>
+            </div>
+
+            <div class="activity-item">
+                <div class="activity-badge success">E</div>
+                <div class="activity-text">
+                    <strong>Emma</strong>
+                    <span>Inkooporder voor vitamines afgerond</span>
+                </div>
+                <div class="activity-meta">
+                    <span class="activity-sign negative">-</span>
+                    <span class="activity-amount">€ 980,00</span>
+                </div>
+            </div>
+
+            <div class="activity-item highlight">
+                <div class="activity-badge accent">T</div>
+                <div class="activity-text">
+                    <strong>Team totaal</strong>
+                    <span>Laatste dag van de maand</span>
+                </div>
+                <div class="activity-meta">
+                    <span class="activity-sign positive">+</span>
+                    <span class="activity-amount total">€ 21.510,10</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const labels = @Html.Raw(Json.Serialize(Model.Labels));
+    const items = @Html.Raw(Json.Serialize(Model.ItemsSold));
+
+    const salePrice = @Model.SalePrice;
+    const purchaseCost = @Model.PurchaseCostPerItem;
+    const administrationCost = @Model.AdministrationCostPerItem;
+    const deliveryCost = @Model.DeliveryCostPerItem;
+
+    const revenue = items.map(item => item * salePrice);
+
+    const cumulativeRevenue = revenue.reduce((accumulator, value) => {
+        const runningTotal = accumulator.length === 0
+            ? value
+            : accumulator[accumulator.length - 1] + value;
+
+        accumulator.push(runningTotal);
+        return accumulator;
+    }, []);
+
+    const ctx = document.getElementById('financialChart');
+    const chartGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 320);
+    chartGradient.addColorStop(0, 'rgba(37, 99, 235, 0.45)');
+    chartGradient.addColorStop(1, 'rgba(37, 99, 235, 0.02)');
+
+    const donutColors = [
+        '#2563eb', '#3b82f6', '#60a5fa', '#93c5fd', '#1d4ed8',
+        '#0ea5e9', '#22c55e', '#34d399', '#f59e0b', '#f97316',
+        '#ef4444', '#a78bfa'
+    ];
+
+    const chartConfig = {
+        line: {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Cumulatieve omzet',
+                    data: cumulativeRevenue,
+                    borderColor: '#2563eb',
+                    backgroundColor: chartGradient,
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.38,
+                    pointRadius: 3,
+                    pointHoverRadius: 5,
+                    pointBackgroundColor: '#2563eb',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'nearest',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'Omzet: € ' + context.raw.toLocaleString('nl-NL', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                });
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        border: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: 'rgba(148, 163, 184, 0.18)'
+                        },
+                        border: {
+                            display: false
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return '€ ' + value.toLocaleString('nl-NL');
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        doughnut: {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Maandelijkse omzet',
+                    data: revenue,
+                    backgroundColor: donutColors,
+                    borderColor: '#ffffff',
+                    borderWidth: 2,
+                    hoverOffset: 8,
+                    spacing: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '68%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            boxWidth: 8,
+                            padding: 12
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': € ' + context.raw.toLocaleString('nl-NL', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    let chartMode = 'line';
+    const lineChartBtn = document.getElementById('lineChartBtn');
+    const donutChartBtn = document.getElementById('donutChartBtn');
+
+    function setChartMode(mode) {
+        if (chartMode === mode) {
+            return;
+        }
+
+        chartMode = mode;
+        financialChart.destroy();
+        financialChart = new Chart(ctx, chartConfig[mode]);
+
+        lineChartBtn.classList.toggle('active', mode === 'line');
+        donutChartBtn.classList.toggle('active', mode === 'doughnut');
+    }
+
+    let financialChart = new Chart(ctx, chartConfig.line);
+
+    lineChartBtn.addEventListener('click', function () {
+        setChartMode('line');
+    });
+
+    donutChartBtn.addEventListener('click', function () {
+        setChartMode('doughnut');
+    });
+</script>
