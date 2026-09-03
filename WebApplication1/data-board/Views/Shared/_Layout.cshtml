@@ -18,14 +18,7 @@
                 Jaar overzicht 
             </a>
 
-            <button class="navbar-toggler" type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target=".navbar-collapse"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            
 
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
@@ -48,21 +41,26 @@
                         </a>
                     </li>
 
+                    <div class="dark-mode-toggle">
+                        <button id="darkModeToggle" type="button" class="btn btn-outline-secondary">
+                            Dark mode
+                        </button>
+                    </div>
+
+                    <button class="navbar-toggler" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target=".navbar-collapse"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
                 </ul>
             </div>
 
         </div>
     </nav>
-
-    
-    <div class="container-fluid">
-        <div class="dark-mode-toggle">
-            <button id="darkModeToggle" class="btn btn-outline-secondary">
-                Dark mode
-            </button>
-        </div>
-    </div>
-    
 </header>
 <div class="container">
     <main role="main" class="pb-3">

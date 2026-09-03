@@ -33,7 +33,7 @@ namespace data_board.Controllers
                     200,
                     250,
                     175,
-                    20,
+                    45,
                     300,
                     180,
                     266,

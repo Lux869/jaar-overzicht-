@@ -1,24 +1,28 @@
 ﻿@model data_board.Models.ChartData
 
 @{
-ViewData["Title"] = "Omzet Dashboard";
-var culture = new System.Globalization.CultureInfo("nl-NL");
+    ViewData["Title"] = "Financieel overzicht";
+    var culture = new System.Globalization.CultureInfo("nl-NL");
 }
 
 <div class="dashboard-shell">
     <div class="dashboard-header">
         <div>
-            <p class="eyebrow">Performance dashboard</p>
-            <h1>Omzet Dashboard</h1>
+            <p class="eyebrow">Financieel overzicht</p>
+            <h1>Jaarresultaten</h1>
+            <p class="dashboard-description">Inzicht in omzet, kosten en resultaat op basis van de huidige jaargegevens.</p>
         </div>
-        <span class="header-chip">Jaaroverzicht</span>
+        <div class="header-statuses">
+            <span class="data-status"><span class="data-status-dot"></span>Live data</span>
+            <span class="header-chip">Jaaroverzicht</span>
+        </div>
     </div>
 
     <div class="row g-4 metric-grid">
         <div class="col-md-3 col-sm-6">
             <div class="metric-card card">
                 <div class="card-body">
-                    <div class="metric-label">Totale omzet</div>
+                    <div class="metric-label">Omzet</div>
                     <div class="metric-value success">@Model.TotalRevenue.ToString("C", culture)</div>
                 </div>
             </div>
@@ -72,7 +76,7 @@ var culture = new System.Globalization.CultureInfo("nl-NL");
         <div class="col-md-3 col-sm-6">
             <div class="metric-card card">
                 <div class="card-body">
-                    <div class="metric-label">Totale winst</div>
+                    <div class="metric-label">Nettoresultaat</div>
                     <div class="metric-value primary">@Model.TotalProfit.ToString("C", culture)</div>
                 </div>
             </div>
@@ -91,12 +95,12 @@ var culture = new System.Globalization.CultureInfo("nl-NL");
     <div class="chart-panel card mt-5">
         <div class="panel-header">
             <div>
-                <p class="panel-kicker">Trend</p>
-                <h3>Groei van omzet</h3>
+                <p class="panel-kicker">Ontwikkeling</p>
+                <h3>Cumulatieve omzet</h3>
             </div>
             <div class="chart-toggle-group">
-                <button id="lineChartBtn" class="chart-toggle-btn active" type="button">Lijn Grafiek</button>
-                <button id="donutChartBtn" class="chart-toggle-btn" type="button">Donut Grafiek</button>
+                <button id="lineChartBtn" class="chart-toggle-btn active" type="button" aria-pressed="true">Lijngrafiek</button>
+                <button id="donutChartBtn" class="chart-toggle-btn" type="button" aria-pressed="false">Donutgrafiek</button>
             </div>
         </div>
 
@@ -112,7 +116,7 @@ var culture = new System.Globalization.CultureInfo("nl-NL");
                     var earned = Model.ItemsSold[i] * Model.SalePrice;
                     var spend = Model.ItemsSold[i] * (Model.PurchaseCostPerItem + Model.AdministrationCostPerItem + Model.DeliveryCostPerItem);
 
-                    <button type="button" class="month-button">
+                    <button type="button" class="month-button @(i == 0 ? "active" : "")" data-month-index="@i" aria-pressed="@(i == 0 ? "true" : "false")">
                         <span class="month-name">@month</span>
                         <span class="month-income">+ @earned.ToString("C", culture)</span>
                         <span class="month-spend">- @spend.ToString("C", culture)</span>
@@ -122,13 +126,16 @@ var culture = new System.Globalization.CultureInfo("nl-NL");
         </div>
     </div>
 
-    <div class="recent-activity card mt-4">
+    <section class="recent-activity card mt-4" aria-labelledby="notification-center-heading">
         <div class="recent-header">
             <div>
-                <p class="panel-kicker">Recent activity</p>
-                <h3>Recente transacties</h3>
+                <p class="panel-kicker">Live overzicht</p>
+                <h3 id="notification-center-heading">Meldingencentrum</h3>
             </div>
-            <span class="panel-badge success">+ 12.4%</span>
+            <div class="recent-statuses">
+                <span class="data-status"><span class="data-status-dot"></span>Live data</span>
+                <span class="panel-badge success">+ 12.4%</span>
+            </div>
         </div>
 
         <div class="activity-list">
@@ -252,7 +259,38 @@ var culture = new System.Globalization.CultureInfo("nl-NL");
                 </div>
             </div>
         </div>
-    </div>
+
+        <form id="notificationForm" class="notification-form">
+            <div class="notification-form-header">
+                <div>
+                    <p class="panel-kicker">Nieuwe melding</p>
+                    <h4>Bericht toevoegen</h4>
+                </div>
+                <button type="submit" class="btn btn-primary">Melding toevoegen</button>
+            </div>
+            <div class="notification-form-fields">
+                <div>
+                    <label for="notificationName">Naam</label>
+                    <input id="notificationName" name="name" type="text" class="form-control" placeholder="Bijv. Anna" required />
+                </div>
+                <div>
+                    <label for="notificationMessage">Bericht</label>
+                    <input id="notificationMessage" name="message" type="text" class="form-control" placeholder="Wat is er gebeurd?" required />
+                </div>
+                <div>
+                    <label for="notificationType">Type</label>
+                    <select id="notificationType" name="type" class="form-select">
+                        <option value="income">Inkomst</option>
+                        <option value="expense">Uitgave</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="notificationAmount">Bedrag</label>
+                    <input id="notificationAmount" name="amount" type="number" class="form-control" min="0.01" step="0.01" placeholder="0,00" required />
+                </div>
+            </div>
+        </form>
+    </section>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -279,12 +317,12 @@ var culture = new System.Globalization.CultureInfo("nl-NL");
 
     const ctx = document.getElementById('financialChart');
     const chartGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 320);
-    chartGradient.addColorStop(0, 'rgba(37, 99, 235, 0.45)');
-    chartGradient.addColorStop(1, 'rgba(37, 99, 235, 0.02)');
+    chartGradient.addColorStop(0, 'rgba(59, 130, 246, 0.5)');
+    chartGradient.addColorStop(1, 'rgba(59, 130, 246, 0.02)');
 
     const donutColors = [
-        '#2563eb', '#3b82f6', '#60a5fa', '#93c5fd', '#1d4ed8',
-        '#0ea5e9', '#22c55e', '#34d399', '#f59e0b', '#f97316',
+        '#3b82f6', '#60a5fa', '#1d4ed8', '#0ea5e9', '#0891b2',
+        '#06b6d4', '#22d3ee', '#f59e0b', '#fbbf24', '#10b981',
         '#ef4444', '#a78bfa'
     ];
 
@@ -296,14 +334,14 @@ var culture = new System.Globalization.CultureInfo("nl-NL");
                 datasets: [{
                     label: 'Cumulatieve omzet',
                     data: cumulativeRevenue,
-                    borderColor: '#2563eb',
+                    borderColor: '#3b82f6',
                     backgroundColor: chartGradient,
                     borderWidth: 3,
                     fill: true,
                     tension: 0.38,
                     pointRadius: 3,
                     pointHoverRadius: 5,
-                    pointBackgroundColor: '#2563eb',
+                    pointBackgroundColor: '#3b82f6',
                     pointBorderColor: '#ffffff',
                     pointBorderWidth: 2
                 }]
@@ -402,6 +440,7 @@ var culture = new System.Globalization.CultureInfo("nl-NL");
     let chartMode = 'line';
     const lineChartBtn = document.getElementById('lineChartBtn');
     const donutChartBtn = document.getElementById('donutChartBtn');
+    const monthButtons = document.querySelectorAll('.month-button');
 
     function setChartMode(mode) {
         if (chartMode === mode) {
@@ -414,9 +453,60 @@ var culture = new System.Globalization.CultureInfo("nl-NL");
 
         lineChartBtn.classList.toggle('active', mode === 'line');
         donutChartBtn.classList.toggle('active', mode === 'doughnut');
+        lineChartBtn.setAttribute('aria-pressed', String(mode === 'line'));
+        donutChartBtn.setAttribute('aria-pressed', String(mode === 'doughnut'));
+    }
+
+    function selectMonth(index) {
+        monthButtons.forEach((button, buttonIndex) => {
+            const isSelected = buttonIndex === index;
+            button.classList.toggle('active', isSelected);
+            button.setAttribute('aria-pressed', String(isSelected));
+        });
+
+        financialChart.setActiveElements([{ datasetIndex: 0, index: index }]);
+        financialChart.tooltip.setActiveElements([{ datasetIndex: 0, index: index }], { x: 0, y: 0 });
+        financialChart.update();
     }
 
     let financialChart = new Chart(ctx, chartConfig.line);
+
+    const notificationForm = document.getElementById('notificationForm');
+    const activityList = document.querySelector('.activity-list');
+
+    notificationForm.addEventListener('submit', event => {
+        event.preventDefault();
+
+        const formData = new FormData(notificationForm);
+        const name = formData.get('name').trim();
+        const message = formData.get('message').trim();
+        const isIncome = formData.get('type') === 'income';
+        const amount = Number(formData.get('amount'));
+        const amountLabel = new Intl.NumberFormat('nl-NL', {
+            style: 'currency',
+            currency: 'EUR'
+        }).format(amount);
+        const notification = document.createElement('div');
+
+        notification.className = 'activity-item';
+        notification.innerHTML = `
+            <div class="activity-badge ${isIncome ? 'success' : 'accent'}"></div>
+            <div class="activity-text">
+                <strong></strong>
+                <span></span>
+            </div>
+            <div class="activity-meta">
+                <span class="activity-sign ${isIncome ? 'positive' : 'negative'}">${isIncome ? '+' : '-'}</span>
+                <span class="activity-amount"></span>
+            </div>`;
+
+        notification.querySelector('.activity-badge').textContent = name.charAt(0).toUpperCase();
+        notification.querySelector('strong').textContent = name;
+        notification.querySelector('.activity-text span').textContent = message;
+        notification.querySelector('.activity-amount').textContent = amountLabel;
+        activityList.prepend(notification);
+        notificationForm.reset();
+    });
 
     lineChartBtn.addEventListener('click', function () {
         setChartMode('line');
@@ -424,5 +514,11 @@ var culture = new System.Globalization.CultureInfo("nl-NL");
 
     donutChartBtn.addEventListener('click', function () {
         setChartMode('doughnut');
+    });
+
+    monthButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            selectMonth(Number(button.dataset.monthIndex));
+        });
     });
 </script>
