@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("data-board")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3cb39a4d9988246758b4c6996f558e8c7ce1f6fe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cc92c79c52a3ce9e9bdca8e566884fbba5e70fbc")]
 [assembly: System.Reflection.AssemblyProductAttribute("data-board")]
 [assembly: System.Reflection.AssemblyTitleAttribute("data-board")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
