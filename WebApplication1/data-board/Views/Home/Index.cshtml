@@ -5,19 +5,20 @@
     var culture = new System.Globalization.CultureInfo("nl-NL");
 }
 
+    <!--header-->
+
 <div class="dashboard-shell">
     <div class="dashboard-header">
         <div>
             <p class="eyebrow">Financieel overzicht</p>
             <h1>Jaarresultaten</h1>
-            <p class="dashboard-description">Inzicht in omzet, kosten en resultaat op basis van de huidige jaargegevens.</p>
-        </div>
-        <div class="header-statuses">
-            <span class="data-status"><span class="data-status-dot"></span>Live data</span>
-            <span class="header-chip">Jaaroverzicht</span>
+            <p class="display-10 text-muted">Inzicht in omzet, kosten en resultaat op basis van de huidige jaargegevens.</p>
         </div>
     </div>
 
+    
+    <!--dashboard-->
+    
     <div class="row g-4 metric-grid">
         <div class="col-md-3 col-sm-6">
             <div class="metric-card card">
@@ -76,7 +77,7 @@
         <div class="col-md-3 col-sm-6">
             <div class="metric-card card">
                 <div class="card-body">
-                    <div class="metric-label">Nettoresultaat</div>
+                    <div class="metric-label">Winst</div>
                     <div class="metric-value primary">@Model.TotalProfit.ToString("C", culture)</div>
                 </div>
             </div>
@@ -92,11 +93,14 @@
         </div>
     </div>
 
+    
+    <!--grafiek-->
+    
     <div class="chart-panel card mt-5">
         <div class="panel-header">
             <div>
                 <p class="panel-kicker">Ontwikkeling</p>
-                <h3>Cumulatieve omzet</h3>
+                <h3>omzet en uitgaven</h3>
             </div>
             <div class="chart-toggle-group">
                 <button id="lineChartBtn" class="chart-toggle-btn active" type="button" aria-pressed="true">Lijngrafiek</button>
@@ -109,6 +113,7 @@
                 <canvas id="financialChart"></canvas>
             </div>
 
+            <!--maanden dingetje-->
             <div class="month-selector" aria-label="Maandoverzicht">
                 @for (var i = 0; i < Model.Labels.Length; i++)
                 {
@@ -126,6 +131,10 @@
         </div>
     </div>
 
+    
+    
+    <!-- meldingen centrum -->
+    
     <section class="recent-activity card mt-4" aria-labelledby="notification-center-heading">
         <div class="recent-header">
             <div>
@@ -133,8 +142,7 @@
                 <h3 id="notification-center-heading">Meldingencentrum</h3>
             </div>
             <div class="recent-statuses">
-                <span class="data-status"><span class="data-status-dot"></span>Live data</span>
-                <span class="panel-badge success">+ 12.4%</span>
+                <span class="panel-badge success">+ 11,8%</span>
             </div>
         </div>
 
@@ -143,11 +151,11 @@
                 <div class="activity-badge success">A</div>
                 <div class="activity-text">
                     <strong>Anna</strong>
-                    <span>Nieuwe bulkorder verwerkt voor SupplementsDirect</span>
+                    <span>B2B-bestelling van 120 artikelen verwerkt</span>
                 </div>
                 <div class="activity-meta">
                     <span class="activity-sign positive">+</span>
-                    <span class="activity-amount">€ 6.820,00</span>
+                    <span class="activity-amount">€ 4.194,00</span>
                 </div>
             </div>
 
@@ -155,11 +163,11 @@
                 <div class="activity-badge primary">M</div>
                 <div class="activity-text">
                     <strong>Mark</strong>
-                    <span>Webshopverkoop afgerond voor GymFuel Pro</span>
+                    <span>Webshopbestelling van 79 artikelen afgerond</span>
                 </div>
                 <div class="activity-meta">
                     <span class="activity-sign positive">+</span>
-                    <span class="activity-amount">€ 5.490,10</span>
+                    <span class="activity-amount">€ 2.761,05</span>
                 </div>
             </div>
 
@@ -167,11 +175,11 @@
                 <div class="activity-badge neutral">L</div>
                 <div class="activity-text">
                     <strong>Lisa</strong>
-                    <span>Levering van PowerPeak goedgekeurd</span>
+                    <span>Voorraadlevering van 150 artikelen goedgekeurd</span>
                 </div>
                 <div class="activity-meta">
                     <span class="activity-sign negative">-</span>
-                    <span class="activity-amount">€ 1.800,00</span>
+                    <span class="activity-amount">€ 1.920,00</span>
                 </div>
             </div>
 
@@ -179,11 +187,11 @@
                 <div class="activity-badge accent">J</div>
                 <div class="activity-text">
                     <strong>Jeroen</strong>
-                    <span>Vaste voorraadbestelling voor pre-workout</span>
+                    <span>Voorraadbestelling voor pre-workout geplaatst</span>
                 </div>
                 <div class="activity-meta">
                     <span class="activity-sign negative">-</span>
-                    <span class="activity-amount">€ 1.240,00</span>
+                    <span class="activity-amount">€ 1.408,00</span>
                 </div>
             </div>
 
@@ -191,11 +199,11 @@
                 <div class="activity-badge success">S</div>
                 <div class="activity-text">
                     <strong>Sanne</strong>
-                    <span>Retourzending verwerkt uit de B2B-shop</span>
+                    <span>Retourzending van 12 artikelen verwerkt</span>
                 </div>
                 <div class="activity-meta">
                     <span class="activity-sign negative">-</span>
-                    <span class="activity-amount">€ 460,00</span>
+                    <span class="activity-amount">€ 419,40</span>
                 </div>
             </div>
 
@@ -203,11 +211,11 @@
                 <div class="activity-badge primary">D</div>
                 <div class="activity-text">
                     <strong>David</strong>
-                    <span>Nieuwe klantorder geplaatst voor post-workout</span>
+                    <span>Nieuwe webshopbestelling van 42 artikelen</span>
                 </div>
                 <div class="activity-meta">
                     <span class="activity-sign positive">+</span>
-                    <span class="activity-amount">€ 2.940,75</span>
+                    <span class="activity-amount">€ 1.467,90</span>
                 </div>
             </div>
 
@@ -215,11 +223,11 @@
                 <div class="activity-badge neutral">K</div>
                 <div class="activity-text">
                     <strong>Karen</strong>
-                    <span>Verkoopcampagne afgerond met extra promo</span>
+                    <span>Campagneorder met 10% promotiekorting afgerond</span>
                 </div>
                 <div class="activity-meta">
                     <span class="activity-sign positive">+</span>
-                    <span class="activity-amount">€ 3.185,40</span>
+                    <span class="activity-amount">€ 2.044,90</span>
                 </div>
             </div>
 
@@ -227,11 +235,11 @@
                 <div class="activity-badge accent">R</div>
                 <div class="activity-text">
                     <strong>Ruben</strong>
-                    <span>Inkoopkosten voor proteinpallets</span>
+                    <span>Inkoop van 250 artikelen voor proteinpallets</span>
                 </div>
                 <div class="activity-meta">
                     <span class="activity-sign negative">-</span>
-                    <span class="activity-amount">€ 2.120,50</span>
+                    <span class="activity-amount">€ 3.200,00</span>
                 </div>
             </div>
 
@@ -239,27 +247,30 @@
                 <div class="activity-badge success">E</div>
                 <div class="activity-text">
                     <strong>Emma</strong>
-                    <span>Inkooporder voor vitamines afgerond</span>
+                    <span>Inkooporder voor 70 vitamineartikelen afgerond</span>
                 </div>
                 <div class="activity-meta">
                     <span class="activity-sign negative">-</span>
-                    <span class="activity-amount">€ 980,00</span>
+                    <span class="activity-amount">€ 896,00</span>
                 </div>
             </div>
 
             <div class="activity-item highlight">
                 <div class="activity-badge accent">T</div>
                 <div class="activity-text">
-                    <strong>Team totaal</strong>
-                    <span>Laatste dag van de maand</span>
+                    <strong>Omzet vandaag</strong>
+                    <span>Alle verkoopkanalen tot nu toe</span>
                 </div>
                 <div class="activity-meta">
                     <span class="activity-sign positive">+</span>
-                    <span class="activity-amount total">€ 21.510,10</span>
+                    <span class="activity-amount total">€ 18.742,60</span>
                 </div>
             </div>
         </div>
-
+        
+        
+        <!-- melding toevoegen -->
+        
         <form id="notificationForm" class="notification-form">
             <div class="notification-form-header">
                 <div>
@@ -305,8 +316,10 @@
     const deliveryCost = @Model.DeliveryCostPerItem;
 
     const revenue = items.map(item => item * salePrice);
+    const expenses = items.map(item => item * (purchaseCost + administrationCost + deliveryCost));
 
-    const cumulativeRevenue = revenue.reduce((accumulator, value) => {
+    function calculateCumulativeValues(values) {
+        return values.reduce((accumulator, value) => {
         const runningTotal = accumulator.length === 0
             ? value
             : accumulator[accumulator.length - 1] + value;
@@ -314,16 +327,28 @@
         accumulator.push(runningTotal);
         return accumulator;
     }, []);
+    }
+
+    const cumulativeRevenue = calculateCumulativeValues(revenue);
+    const cumulativeExpenses = calculateCumulativeValues(expenses);
 
     const ctx = document.getElementById('financialChart');
     const chartGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 320);
     chartGradient.addColorStop(0, 'rgba(59, 130, 246, 0.5)');
     chartGradient.addColorStop(1, 'rgba(59, 130, 246, 0.02)');
+    const expenseGradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 320);
+    expenseGradient.addColorStop(0, 'rgba(239, 68, 68, 0.25)');
+    expenseGradient.addColorStop(1, 'rgba(239, 68, 68, 0.02)');
 
     const donutColors = [
         '#3b82f6', '#60a5fa', '#1d4ed8', '#0ea5e9', '#0891b2',
         '#06b6d4', '#22d3ee', '#f59e0b', '#fbbf24', '#10b981',
         '#ef4444', '#a78bfa'
+    ];
+    const expenseDonutColors = [
+        '#ef4444', '#f87171', '#dc2626', '#fb7185', '#e11d48',
+        '#f43f5e', '#be123c', '#b91c1c', '#991b1b', '#9f1239',
+        '#fecaca', '#fda4af'
     ];
 
     const chartConfig = {
@@ -331,20 +356,36 @@
             type: 'line',
             data: {
                 labels: labels,
-                datasets: [{
-                    label: 'Cumulatieve omzet',
-                    data: cumulativeRevenue,
-                    borderColor: '#3b82f6',
-                    backgroundColor: chartGradient,
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.38,
-                    pointRadius: 3,
-                    pointHoverRadius: 5,
-                    pointBackgroundColor: '#3b82f6',
-                    pointBorderColor: '#ffffff',
-                    pointBorderWidth: 2
-                }]
+                datasets: [
+                    {
+                        label: 'omzet',
+                        data: cumulativeRevenue,
+                        borderColor: '#3b82f6',
+                        backgroundColor: chartGradient,
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.38,
+                        pointRadius: 3,
+                        pointHoverRadius: 5,
+                        pointBackgroundColor: '#3b82f6',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2
+                    },
+                    {
+                        label: 'uitgaven',
+                        data: cumulativeExpenses,
+                        borderColor: '#ef4444',
+                        backgroundColor: expenseGradient,
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.38,
+                        pointRadius: 3,
+                        pointHoverRadius: 5,
+                        pointBackgroundColor: '#ef4444',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2
+                    }
+                ]
             },
             options: {
                 responsive: true,
@@ -360,7 +401,7 @@
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return 'Omzet: € ' + context.raw.toLocaleString('nl-NL', {
+                                return context.dataset.label + ': € ' + context.raw.toLocaleString('nl-NL', {
                                     minimumFractionDigits: 2,
                                     maximumFractionDigits: 2
                                 });
@@ -398,21 +439,40 @@
             type: 'doughnut',
             data: {
                 labels: labels,
-                datasets: [{
-                    label: 'Maandelijkse omzet',
-                    data: revenue,
-                    backgroundColor: donutColors,
-                    borderColor: '#ffffff',
-                    borderWidth: 2,
-                    hoverOffset: 8,
-                    spacing: 10
-                }]
+                datasets: [
+                    {
+                        label: 'omzet',
+                        data: revenue,
+                        backgroundColor: donutColors,
+                        borderColor: '#ffffff',
+                        borderWidth: 2,
+                        hoverOffset: 8,
+                        spacing: 10
+                    },
+                    {
+                        label: 'uitgaven',
+                        data: expenses,
+                        backgroundColor: expenseDonutColors,
+                        borderColor: '#ffffff',
+                        borderWidth: 2,
+                        hoverOffset: 8,
+                        spacing: 10
+                    }
+                ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 cutout: '68%',
                 plugins: {
+                    title: {
+                        display: true,
+                        text: 'Buitenring: omzet | Binnenring: uitgaven',
+                        font: {
+                            size: 12,
+                            weight: 'normal'
+                        }
+                    },
                     legend: {
                         position: 'bottom',
                         labels: {
@@ -425,7 +485,7 @@
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return context.label + ': € ' + context.raw.toLocaleString('nl-NL', {
+                                return context.dataset.label + ' (' + context.label + '): € ' + context.raw.toLocaleString('nl-NL', {
                                     minimumFractionDigits: 2,
                                     maximumFractionDigits: 2
                                 });
@@ -464,8 +524,13 @@
             button.setAttribute('aria-pressed', String(isSelected));
         });
 
-        financialChart.setActiveElements([{ datasetIndex: 0, index: index }]);
-        financialChart.tooltip.setActiveElements([{ datasetIndex: 0, index: index }], { x: 0, y: 0 });
+        const activeElements = financialChart.data.datasets.map((_, datasetIndex) => ({
+            datasetIndex: datasetIndex,
+            index: index
+        }));
+
+        financialChart.setActiveElements(activeElements);
+        financialChart.tooltip.setActiveElements(activeElements, { x: 0, y: 0 });
         financialChart.update();
     }
 

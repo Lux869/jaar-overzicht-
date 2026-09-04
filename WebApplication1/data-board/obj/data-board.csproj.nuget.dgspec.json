@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lucsmit\\RiderProjects\\WebApplication1\\data-board\\data-board.csproj": {}
+    "C:\\Users\\lucsmit\\Documents\\GitHub\\jaar-overzicht-\\WebApplication1\\data-board\\data-board.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lucsmit\\RiderProjects\\WebApplication1\\data-board\\data-board.csproj": {
+    "C:\\Users\\lucsmit\\Documents\\GitHub\\jaar-overzicht-\\WebApplication1\\data-board\\data-board.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucsmit\\RiderProjects\\WebApplication1\\data-board\\data-board.csproj",
+        "projectUniqueName": "C:\\Users\\lucsmit\\Documents\\GitHub\\jaar-overzicht-\\WebApplication1\\data-board\\data-board.csproj",
         "projectName": "data-board",
-        "projectPath": "C:\\Users\\lucsmit\\RiderProjects\\WebApplication1\\data-board\\data-board.csproj",
+        "projectPath": "C:\\Users\\lucsmit\\Documents\\GitHub\\jaar-overzicht-\\WebApplication1\\data-board\\data-board.csproj",
         "packagesPath": "C:\\Users\\lucsmit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucsmit\\RiderProjects\\WebApplication1\\data-board\\obj\\",
+        "outputPath": "C:\\Users\\lucsmit\\Documents\\GitHub\\jaar-overzicht-\\WebApplication1\\data-board\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lucsmit\\AppData\\Roaming\\NuGet\\NuGet.Config"

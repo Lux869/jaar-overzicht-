@@ -27,25 +27,25 @@ namespace data_board.Controllers
 
                 ItemsSold = new[]
                 {
-                    100,
-                    150,
-                    125,
-                    200,
-                    250,
-                    175,
-                    45,
-                    300,
-                    180,
-                    266,
-                    85,
-                    300
+                    1240,
+                    1325,
+                    1490,
+                    1580,
+                    1725,
+                    1650,
+                    1420,
+                    1510,
+                    1640,
+                    1760,
+                    1890,
+                    2380
                 },
 
-                SalePrice = 10.00m,
-                PurchaseCostPerItem = 0.73m,
-                AdministrationCostPerItem = 0.20m,
-                DeliveryCostPerItem = 2.50m,
-                EmployeeCosts = 200.00m
+                SalePrice = 34.95m,
+                PurchaseCostPerItem = 12.80m,
+                AdministrationCostPerItem = 2.35m,
+                DeliveryCostPerItem = 4.10m,
+                EmployeeCosts = 214500.00m
             };
 
             return View(data);

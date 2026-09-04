@@ -6,13 +6,13 @@ namespace data_board.Models
         public int[] ItemsSold { get; set; } = Array.Empty<int>();
 
         // Prijzen en kosten
-        public decimal SalePrice { get; set; } = 10.00m;
-        public decimal PurchaseCostPerItem { get; set; } = 0.73m;
-        public decimal AdministrationCostPerItem { get; set; } = 0.20m;
-        public decimal DeliveryCostPerItem { get; set; } = 2.50m;
+        public decimal SalePrice { get; set; } = 34.95m;
+        public decimal PurchaseCostPerItem { get; set; } = 12.80m;
+        public decimal AdministrationCostPerItem { get; set; } = 2.35m;
+        public decimal DeliveryCostPerItem { get; set; } = 4.10m;
 
         // Vaste werknemerskosten
-        public decimal EmployeeCosts { get; set; } = 50.00m;
+        public decimal EmployeeCosts { get; set; } = 214500.00m;
 
         // Berekeningen
         public int TotalItems => ItemsSold.Sum();
